@@ -316,13 +316,15 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
     if ([self duration] == 0) {
       return;
     }
-
+      
+      CGSize realSize = [self.player currentItem].videoComposition.renderSize;
+      
     _isInitialized = true;
     _eventSink(@{
       @"event" : @"initialized",
       @"duration" : @([self duration]),
-      @"width" : @(width),
-      @"height" : @(height)
+      @"width" : @(fabs(realSize.width) ? : width),
+      @"height" : @(fabs(realSize.height) ? : height)
     });
   }
 }
